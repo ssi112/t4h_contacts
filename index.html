@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Tree 4 Hope Contacts</title>
+	<!-- **********************************************
+				load content to match device screen
+				initial-scale=1  -> DIP pixels to CSS pixels
+			 ********************************************** -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="T4H Contacts Form">
+  <meta name="SSI" content="nonesuch">
+  <link rel="stylesheet" href="css/reset.css" type="text/css" />
+  <link rel="stylesheet" href="css/contact_form.css" type="text/css" />
+  <script type="text/javascript" charset="utf-8" src="js/idb_contacts.js"></script>
+</head>
+<body>
+	<form class="pure-form pure-form-aligned">
+		<fieldset>
+			<div class="pure-control-group">
+				<img src="img/T4Hlogo_smaller.png">
+				<label for="search" style='margin-left: -90px;'>Last:</label>
+				<input type="text" id="search-key">
+				<button id="search">Search</button>
+				<hr>
+				<button id="prev">Prev</button>
+				<button id="next">Next</button>
+				<button id="clear" style='margin-left: 40px;'>Clear</button>
+				<button id="delete">Delete</button>
+				<button id="save">Save</button>
+			</div>
+		</fieldset>
+
+		<fieldset>
+			<div class="pure-control-group">
+				<label for="field-first">* First Name: </label> <input type="text" id="field-first">
+			</div>
+			<div class="pure-control-group">
+				<label for="field-last">* Last Name: </label> <input type="text" id="field-last">
+			</div>
+			<div class="pure-control-group">
+				<label for="field-address1">* Address Line 1: </label> <input type="text" id="field-address1" size="30">
+			</div>
+			<div class="pure-control-group">
+				<label for="field-address2">Address Line 2: </label> <input type="text" id="field-address2" size="30">
+			</div>
+			<div class="pure-control-group">
+				<label for="field-city">* City: </label> <input type="text" id="field-city">
+			</div>
+			<div class="pure-control-group">
+				<label for="field-state">* State: </label> <input type="text" id="field-state" size="2">
+			</div>
+			<div class="pure-control-group">
+				<label for="field-zip4">* Zip (+4 if known): </label><input type="text" id="field-zip4" size="9">
+			</div>
+			<div class="pure-control-group">
+				<label for="field-email1">* Email 1: </label> <input type="email" id="field-email1" size="50">
+			</div>
+			<div class="pure-control-group">
+				<label for="field-email2">Email 2: </label> <input type="email" id="field-email2" size="50">
+			</div>
+			<div class="pure-control-group">
+				<label for="field-tele1">* Telephone 1: </label> <input type="tel" id="field-tele1" size="10">
+			</div>
+			<div class="pure-control-group">
+				<label for="field-tele2">Telephone 2: </label> <input type="tel" id="field-tele2" size="10">
+			</div>
+			<div class="pure-control-group">
+				<label for="form-msg">* Required </label>
+			</div>
+			<input type="hidden" id="field-primaryKey">
+		</fieldset>
+
+		<fieldset>
+			<div class="pure-control-group">
+				<button id="import">Import...</button>
+				<button id="export">Export...</button>
+				<button id="count">Count contacts...</button>
+			</div>
+		</fieldset>
+		<p id="message">&nbsp;</p>
+	</form>
+</body>
+</html>

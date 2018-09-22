@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title> T4H Expense Tracker </title>
+  <meta name="description" content="Aligned Form">
+  <meta name="SSI" content="nonesuch">
+  <link rel="stylesheet" href="flex_form.css">
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+
+  <div class="container">
+    <form>
+      <ul class="flex-outer">
+        <li>
+          <label for="exp-log-name">Expense Log or Trip Name</label>
+          <input type="text" id="exp-log-name" placeholder="Enter the name for this expense log">
+        </li>
+        <li>
+          <label for="start-date">Start Date</label>
+          <input type="date" id="start-date" placeholder="Enter the begin date">
+        </li>
+        <li>
+          <label for="end-date">End Date</label>
+          <input type="date" id="end-date" placeholder="Enter the end date">
+        </li>
+        <li>
+          <label for="team-num">Number of team members</label>
+          <input type="number" id="team-num" placeholder="Enter the number of team members">
+        </li>
+        <li>
+          <label for="exp-note">Expense Log Notes</label>
+          <textarea rows="6" id="exp-note" placeholder="Enter notes"></textarea>
+        </li>
+        <li>
+          <label for="gtq-begin">Beginning Amount of Quetzals</label>
+          <input type="number" id="gtq-begin" placeholder="Enter the amount of Quetzals on hand">
+        </li>
+        <li>
+          <label for="usd-begin">Beginning Amount of US Dollars</label>
+          <input type="number" id="usd-begin" placeholder="Enter the amount of US Dollars on hand">
+        </li>
+
+        <!-- expense detail section -->
+        <li>
+          <label for="team-member-name">Team Member Name</label>
+          <input type="text" id="team-member-name" placeholder="Enter team member name">
+        </li>
+        <li>
+          <label for="exp-date">Expense Date</label>
+          <input type="date" id="exp-date" placeholder="Enter the expense date">
+        </li>
+        <li>
+          <label for="exp-description">Expense Description</label>
+          <input type="text" id="exp-description" placeholder="Expense description">
+        </li>
+        <li>
+          <label for="exp-category">Expense Category</label>
+          <input type="number" id="exp-category" placeholder="drop down list">
+        </li>
+        <li>
+          <label for="exp-type">Expense Type</label>
+          <input type="number" id="exp-type" placeholder="drop down list ">
+        </li>
+        <li>
+          <label for="exp-amount ">Expense Amount</label>
+          <input type="number " id="exp-amount " placeholder="Enter the expense amount">
+        </li>
+        <li>
+          <label for="exp-detail-note">Expense Item Notes</label>
+          <textarea rows="2" id="exp-detail-note" placeholder="Enter expense item notes"></textarea>
+        </li>
+        <li>
+          <button type="submit ">Submit</button>
+        </li>
+      </ul>
+    </form>
+  </div>
+</body>
+
+</html>
