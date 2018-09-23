@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="css/contact_form.css" type="text/css" />
   <script type="text/javascript" charset="utf-8" src="js/idb_contacts.js"></script>
 </head>
+
 <body>
 	<form class="pure-form pure-form-aligned">
 		<fieldset>
@@ -21,16 +22,22 @@
 				<img src="img/T4Hlogo_smaller.png">
 				<label for="search" style='margin-left: -90px;'>Last:</label>
 				<input type="text" id="search-key">
-				<button id="search">Search</button>
+				<!-- Default behavior of button is to act like a submit button if it's inside a form.
+					   If add type='button', it stops acting like a submit button -->
+				<button type="button" id="search">Search</button>
 				<hr>
-				<button id="prev">Prev</button>
-				<button id="next">Next</button>
-				<button id="clear" style='margin-left: 40px;'>Clear</button>
-				<button id="delete">Delete</button>
-				<button id="save">Save</button>
+				<button type="button" id="prev">Prev</button>
+				<button type="button" id="next">Next</button>
+				<button type="button" id="clear" style='margin-left: 40px;'>Clear</button>
+				<button type="button" id="delete">Delete</button>
+				<button type="button" id="save">Save</button>
 			</div>
 		</fieldset>
 
+		<!-- *******************************************************
+					See this site for good example of international data
+					https://randomuser.me/
+		     ******************************************************* -->
 		<fieldset>
 			<div class="pure-control-group">
 				<label for="field-first">* First Name: </label> <input type="text" id="field-first">
@@ -73,9 +80,9 @@
 
 		<fieldset>
 			<div class="pure-control-group">
-				<button id="import">Import...</button>
-				<button id="export">Export...</button>
-				<button id="count">Count contacts...</button>
+				<button type="button" id="import">Import...</button>
+				<button type="button" id="export">Export...</button>
+				<button type="button" id="count">Count contacts...</button>
 			</div>
 		</fieldset>
 		<p id="message">&nbsp;</p>

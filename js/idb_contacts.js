@@ -1,27 +1,15 @@
 "use strict";
 window.onload = function () {
 
-var db;
-const dbVERSION = 1;
-const dbNAME = 'tree4hope';
-const dbCONTACTS = 'contacts';
-
-openDatabase();
-
-	function openDatabase() {
-		var request = indexedDB.open("dbNAME", dbVERSION);
-		request.onsuccess = function(event) {
-			db = request.result;
-			db.onerror = errorHandler;
-			showMessage('Database opened', true);
-		};
-		request.onerror = errorHandler;
-		request.onupgradeneeded = function(event) {
-			var db = event.target.result;
-			var store = db.createObjectStore("dbCONTACTS", { autoIncrement: true });
-			store.createIndex("lastNameIndex", "last", { unique: false });
-		};
-	}
+	// Use cursor instead of get in search(), as we need the primaryKey.
+	// Need to move past current object if primaryKey is set.
+	//begin handler_search
+	document.querySelector("#search").addEventListener("click",
+		function () {
+			fillForm();
+			search(document.querySelector("#search-key").value, "next", 0);
+		}
+	);
 
 	//begin handler_count
 	document.querySelector("#count").addEventListener("click",
@@ -31,14 +19,72 @@ openDatabase();
 			.objectStore("dbCONTACTS")
 			.count()
 			.onsuccess = function (event) {
-				Dialogs.alert(event.target.result + ' objects in database');
+				alert(event.target.result + ' objects in database');
 			};
 		}
 	);
 	//end
 
-//begin import_code
-document.querySelector("#import").addEventListener("click", importData);
+	//begin handler_prev
+	document.querySelector("#prev").addEventListener("click",
+		function () {
+			search(document.querySelector("#field-last").value, "prev",
+			  document.querySelector("#field-primaryKey").value);
+		}
+	);
+	//end
+
+	//begin handler_next
+	document.querySelector("#next").addEventListener("click",
+		function () {
+			search(document.querySelector("#field-last").value, "next",
+			  document.querySelector("#field-primaryKey").value);
+		}
+	);
+	//end
+
+	//begin handler_clear
+	document.querySelector("#clear").addEventListener("click",
+		function () {
+			fillForm();
+		}
+	);
+	//end
+
+	//begin import_code
+	document.querySelector("#import").addEventListener("click", importData);
+
+	// handle deletions
+	document.querySelector("#delete").addEventListener("click", handleDelete);
+
+	document.querySelector("#save").addEventListener("click", saveContact);
+
+	openDatabase();
+
+} // end onload
+
+var db;
+const dbVERSION = 1;
+const dbNAME = 'tree4hope';
+const dbCONTACTS = 'contacts';
+
+// openDatabase();
+
+function openDatabase() {
+	var request = indexedDB.open("dbNAME", dbVERSION);
+	request.onsuccess = function(event) {
+		db = request.result;
+		db.onerror = errorHandler;
+		showMessage('Database opened', true);
+	};
+	request.onerror = errorHandler;
+	request.onupgradeneeded = function(event) {
+		var db = event.target.result;
+		var store = db.createObjectStore("dbCONTACTS", { autoIncrement: true });
+		store.createIndex("lastNameIndex", "last", { unique: false });
+	};
+}
+
 
 function importData() {
 	chrome.fileSystem.chooseEntry(
@@ -76,16 +122,6 @@ function loadData(objects) {
 }
 
 
-// Use cursor instead of get in search(), as we need the primaryKey.
-// Need to move past current object if primaryKey is set.
-//begin handler_search
-document.querySelector("#search").addEventListener("click",
-	function () {
-		fillForm();
-		search(document.querySelector("#search-key").value, "next", 0);
-	}
-);
-
 function search(key, dir, primaryKey) {
 	primaryKey = parseInt(primaryKey);
 	var range;
@@ -93,6 +129,9 @@ function search(key, dir, primaryKey) {
 		range = IDBKeyRange.lowerBound(key, false);
 	else
 		range = IDBKeyRange.upperBound(key, false);
+
+	// debugger
+
 	db
 	.transaction("dbCONTACTS")
 	.objectStore("dbCONTACTS")
@@ -117,35 +156,9 @@ function search(key, dir, primaryKey) {
 }
 //end
 
-//begin handler_prev
-document.querySelector("#prev").addEventListener("click",
-	function () {
-		search(document.querySelector("#field-last").value, "prev",
-		  document.querySelector("#field-primaryKey").value);
-	}
-);
-//end
-
-//begin handler_next
-document.querySelector("#next").addEventListener("click",
-	function () {
-		search(document.querySelector("#field-last").value, "next",
-		  document.querySelector("#field-primaryKey").value);
-	}
-);
-//end
-
-//begin handler_clear
-document.querySelector("#clear").addEventListener("click",
-	function () {
-		fillForm();
-	}
-);
-//end
 
 //begin handler_delete
-document.querySelector("#delete").addEventListener("click",
-	function () {
+const handleDelete =function () {
 		var primaryKey =
 		  parseInt(document.querySelector("#field-primaryKey").value);
 		if (primaryKey > 0) {
@@ -158,13 +171,11 @@ document.querySelector("#delete").addEventListener("click",
 				showMessage('Deleted', true);
 			};
 		}
-	}
-);
+	};
 //end
 
 //begin handler_save
-document.querySelector("#save").addEventListener("click",
-	function () {
+const saveContact =	function () {
 		var store = db
 			.transaction("dbCONTACTS", "readwrite")
 			.objectStore("dbCONTACTS");
@@ -185,8 +196,7 @@ document.querySelector("#save").addEventListener("click",
 				showMessage('Updated', true);
 			};
 		}
-	}
-);
+	};
 //end
 
 //begin fillForm_code
@@ -239,6 +249,7 @@ function showMessage(msg, good) {
 	messageElement.innerHTML = msg;
 	if (timeoutID)
 		clearTimeout(timeoutID);
+	// clear message after 5 seconds
 	timeoutID = setTimeout(
 		function () {
 			messageElement.innerHTML = "&nbsp;";
@@ -263,4 +274,4 @@ function errorHandler(e) {
 	showMessage('Error: ' + msg);
 }
 
-};
+
