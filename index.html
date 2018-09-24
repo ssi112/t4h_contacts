@@ -26,17 +26,16 @@
 					   If add type='button', it stops acting like a submit button -->
 				<button type="button" id="search">Search</button>
 				<hr>
-				<button type="button" id="prev">Prev</button>
+				<button type="button" id="prev" style='margin-left: 40px;'>Prev</button>
 				<button type="button" id="next">Next</button>
-				<button type="button" id="clear" style='margin-left: 40px;'>Clear</button>
-				<button type="button" id="delete">Delete</button>
-				<button type="button" id="save">Save</button>
 			</div>
 		</fieldset>
 
 		<!-- *******************************************************
-					See this site for good example of international data
-					https://randomuser.me/
+					Ref sites for examples of international data
+						http://www.datafakegenerator.com/generador.php
+						https://randomuser.me/
+						https://names.igopaygo.com/people/fake-person
 		     ******************************************************* -->
 		<fieldset>
 			<div class="pure-control-group">
@@ -55,16 +54,17 @@
 				<label for="field-city">* City: </label> <input type="text" id="field-city">
 			</div>
 			<div class="pure-control-group">
-				<label for="field-state">* State: </label> <input type="text" id="field-state" size="2">
+				<label for="field-state">* State/Province/Region: </label> <input type="text" id="field-state" size="2">
 			</div>
 			<div class="pure-control-group">
-				<label for="field-zip4">* Zip (+4 if known): </label><input type="text" id="field-zip4" size="9">
+				<label for="field-zip4">* Zip/Postal Code: </label><input type="text" id="field-zip4" size="9">
+			</div>
+			<div class="pure-control-group">
+				<label for="country">* Country: </label><input type="text" id="country" size="9">
 			</div>
 			<div class="pure-control-group">
 				<label for="field-email1">* Email 1: </label> <input type="email" id="field-email1" size="50">
 			</div>
-			<div class="pure-control-group">
-				<label for="field-email2">Email 2: </label> <input type="email" id="field-email2" size="50">
 			</div>
 			<div class="pure-control-group">
 				<label for="field-tele1">* Telephone 1: </label> <input type="tel" id="field-tele1" size="10">
@@ -74,12 +74,16 @@
 			</div>
 			<div class="pure-control-group">
 				<label for="form-msg">* Required </label>
+				<button type="button" id="save">&nbsp;&nbsp;&nbsp;Save&nbsp;&nbsp;&nbsp;</button>
 			</div>
 			<input type="hidden" id="field-primaryKey">
 		</fieldset>
 
 		<fieldset>
 			<div class="pure-control-group">
+				<button type="button" id="clear" style='margin-left: 40px;'>New/Clear</button>
+				<button type="button" id="delete">Delete</button>
+
 				<button type="button" id="import">Import...</button>
 				<button type="button" id="export">Export...</button>
 				<button type="button" id="count">Count contacts...</button>

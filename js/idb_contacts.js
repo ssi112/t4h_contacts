@@ -212,8 +212,8 @@ function fillForm(object, primaryKey) {
 	document.querySelector("#field-city").value = val(object.city);
 	document.querySelector("#field-state").value = val(object.state);
 	document.querySelector("#field-zip4").value = val(object.zip4);
+	document.querySelector("#country").value = val(object.country);
 	document.querySelector("#field-email1").value = val(object.email1);
-	document.querySelector("#field-email2").value = val(object.email2);
 	document.querySelector("#field-tele1").value = val(object.tele1);
 	document.querySelector("#field-tele2").value = val(object.tele2);
 	document.querySelector("#field-primaryKey").value = primaryKey;
@@ -233,8 +233,8 @@ function getForm() {
 		city: document.querySelector("#field-city").value,
 		state: document.querySelector("#field-state").value,
 		zip4: document.querySelector("#field-zip4").value,
+		country: document.querySelector("#country").value,
 		email1: document.querySelector("#field-email1").value,
-		email2: document.querySelector("#field-email2").value,
 		tele1: document.querySelector("#field-tele1").value,
 		tele2: document.querySelector("#field-tele2").value
 	};
