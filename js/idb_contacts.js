@@ -82,7 +82,10 @@ var contactMetaData = {
     'email1': {'type': 'email', 'size': 65, 'required': true},
     'tele1': {'type': 'tel', 'size': 15, 'required': true},
     'tele2': {'type': 'tel', 'size': 15, 'required': false},
-    'primaryKey': {'type': 'number', 'required': false}
+    // following are all required but handled internally
+    'primaryKey': {'type': 'number', 'required': false},
+    'dateCreated': {'type': 'number', 'required': false},
+    'dateUpdated': {'type': 'number', 'required': false}
   };
 
 const testDataName = function() {
@@ -213,23 +216,31 @@ const saveContact =  function () {
     var primaryKey = key ? parseInt(key) : 0;
 
     if (primaryKey === 0) { // add new record
+      // current timestamp in milliseconds (milliseconds since 1970/01/01)
+      object.dateCreated = Math.floor(Date.now());
+      object.dateUpdated = object.dateCreated;
       store
       .add(object)
       .onsuccess = function (event) {
-        /*
-          Any event object that is received by onsuccess handler always has
-          event.target.result. In this case it is key of record just added.
-         */
+        // once added the new record stays on screen for visual confirmation
+        // the user may choose to edit the new record
+        // make sure dates are not lost on newly created record
+        document.querySelector("#field-dateCreated").value = object.dateCreated;
+        document.querySelector("#field-dateUpdated").value = object.dateUpdated;
+
+        // Any event object that is received by onsuccess handler always has
+        //  event.target.result. In this case it is key of record just added.
         let key = event.target.result;
         /*
          this prevents a duplicate record being added if user decides to
-         edit the newly created record
+         edit the newly created record as key needs put in the hidden field
         */
         document.querySelector("#field-primaryKey").value = key;
         showMessage(`Added: index key = ${key}`, true);
       };
     }
     else {  // update existing record
+      object.dateUpdated = Math.floor(Date.now());
       store
       .put(object, primaryKey)
       .onsuccess = function (event) {
